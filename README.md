@@ -25,3 +25,14 @@ Abas usam setas, Home e End. FAQ usa details/summary nativo. Formulário usa val
 ## Limites de validação
 Meta Lighthouse 90+ depende de medição no ambiente final; não é uma pontuação garantida. Giroscópio e bloom não foram habilitados: o modelo usa luz azul e aura CSS, com tilt por mouse. Os símbolos visuais são recriados, não um arquivo oficial da marca. Hospedagem não foi configurada, pois a entrega solicitada é o código local pronto para rodar.
 
+
+## Demonstrações interativas
+- A placa permite giro 360° por arraste horizontal, botões ou setas do teclado. Home / Frente restaura a posição. O mesmo controle atua no modelo Three.js e no fallback CSS; no celular, o gesto vertical continua rolando a página.
+- O monitor na aba Criação de Sites carrega `assets/site-demo.html`, com CSS e JS próprios, em iframe isolado. Menu, filtros, detalhes de serviços e formulário funcionam apenas como demonstração. Nenhum dado é enviado ou salvo.
+- `assets/mrs-emblem.svg` é a recriação vetorial inspirada na referência de chapéu, monóculo e gravata. Está no cabeçalho, rodapé, detalhe do monitor e ícone da aba.
+- Verificados: sintaxe JS, arquivos referenciados, controles do modelo e comportamento dos filtros, modal e formulário em teste isolado. Revisão visual no navegador permanece pendente.
+
+## Correções e verificação em navegador
+O WhatsApp agora normaliza o número configurado antes de montar wa.me. O envio continua dependendo da confirmação do visitante. Corrigido o seletor dos controles 360° e o carregamento dos recursos do mini site no iframe local confiável. O iframe permite scripts e mesma origem para este conteúdo próprio; não deve carregar sites de terceiros.
+
+Verificado em Microsoft Edge: arraste da placa, carregamento do CSS, filtro e modal de serviços, abertura do WhatsApp no contato configurado, ausência de erros JavaScript e ausência de rolagem horizontal no viewport de 390px. Capturas do monitor em desktop e celular foram inspecionadas visualmente. Nenhuma mensagem foi enviada durante o teste.

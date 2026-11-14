@@ -64,11 +64,12 @@ $$('.destinations button').forEach(button => button.addEventListener('click', ()
  $$('.destinations button').forEach(b => { b.classList.toggle('selected', b === button); b.setAttribute('aria-pressed', b === button); }); scan();
 }));
 function openWhatsApp(message) {
- if (!/^\d{10,15}$/.test(CONTACT.whatsapp)) {
+ const phone = CONTACT.whatsapp.replace(/\D/g, "");
+ if (!/^\d{10,15}$/.test(phone)) {
    $('.form-status').textContent = 'O WhatsApp da MR’s Products ainda não foi configurado. Substitua [SEU_WHATSAPP] em js/main.js para habilitar o envio.';
    $('#contato').scrollIntoView({ behavior: reduced ? 'instant' : 'smooth' }); return false;
  }
- window.open(`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer'); return true;
+ window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer'); return true;
 }
 $$('.whatsapp-link').forEach(link => link.addEventListener('click', event => { event.preventDefault(); openWhatsApp('Olá! Quero conhecer as soluções da MR’s Products para o meu negócio.'); }));
 $('#contact-form').addEventListener('submit', event => { event.preventDefault(); const form = event.currentTarget; if (!form.reportValidity()) return; const data = new FormData(form); const text = `Olá, MR’s Products! Meu nome é ${data.get('name')}.\nWhatsApp: ${data.get('whatsapp')}\nInteresse: ${data.get('interest')}\n${data.get('message')}`; if (openWhatsApp(text)) $('.form-status').textContent = 'Mensagem preparada! Conclua o envio na conversa do WhatsApp.'; });
@@ -89,8 +90,6 @@ if (!reduced && matchMedia('(pointer:fine)').matches) {
  document.documentElement.addEventListener('pointerleave', () => cursor.classList.remove('tracking'));
  window.addEventListener('blur', () => cursor.classList.remove('tracking'));
  $$('a,button,summary').forEach(element => { element.addEventListener('pointerenter', () => cursor.classList.add('hover')); element.addEventListener('pointerleave', () => cursor.classList.remove('hover')); });
- $('.product-stage').addEventListener('pointermove', event => { const r = event.currentTarget.getBoundingClientRect(); mouseX = (event.clientX-r.left)/r.width-.5; mouseY = (event.clientY-r.top)/r.height-.5; $('.plate').style.transform = `rotateY(${-23+mouseX*18}deg) rotateX(${4-mouseY*12}deg) rotateZ(-9deg)`; });
- $('.product-stage').addEventListener('pointerleave', () => { mouseX=0;mouseY=0;$('.plate').style.transform=''; });
 }
 // Optional motion libraries: core interactions and CSS fallback remain functional offline.
 if (!reduced) {
@@ -101,9 +100,44 @@ if (!reduced) {
  }).catch(() => {});
  import('https://cdn.jsdelivr.net/npm/lenis@1.1.20/+esm').then(({default:Lenis}) => { const lenis = new Lenis({ autoRaf:true, anchors:true, duration:1.05 }); document.addEventListener('visibilitychange', () => document.hidden ? lenis.stop() : lenis.start()); }).catch(() => {});
 }
+// Rotação 360° por arraste, botões e teclado, inclusive no fallback CSS.
+let plateYaw = -.35;
+let platePitch = .08;
+const stage360 = $('.product-stage');
+stage360.tabIndex = 0;
+stage360.setAttribute('aria-label', 'Placa NFC em 360 graus. Arraste ou use as setas esquerda e direita para girar. Home volta à frente.');
+const updateFallback = () => {
+ $('.plate').style.transform = 'rotateX(' + platePitch + 'rad) rotateY(' + plateYaw + 'rad)';
+};
+function turnPlate(value) {
+ plateYaw = value === 'reset' ? -.35 : plateYaw + Number(value) * Math.PI / 180;
+ updateFallback();
+}
+$$('[data-turn]').forEach(button => button.addEventListener('click', () => turnPlate(button.dataset.turn)));
+let drag = null;
+stage360.addEventListener('pointerdown', event => {
+ if (event.target.closest('button') || event.button !== 0) return;
+ drag = { id: event.pointerId, x: event.clientX, angle: plateYaw };
+ stage360.setPointerCapture(event.pointerId); stage360.classList.add('dragging');
+});
+stage360.addEventListener('pointermove', event => {
+ if (!drag || drag.id !== event.pointerId) return;
+ plateYaw = drag.angle + (event.clientX - drag.x) * .012;
+ updateFallback();
+});
+const endDrag = () => { drag = null; stage360.classList.remove('dragging'); };
+['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => stage360.addEventListener(type, endDrag));
+stage360.addEventListener('keydown', event => {
+ if (event.target !== stage360) return;
+ if (['ArrowLeft', 'ArrowRight', 'Home'].includes(event.key)) {
+  event.preventDefault(); turnPlate(event.key === 'Home' ? 'reset' : event.key === 'ArrowLeft' ? -15 : 15);
+ }
+});
+updateFallback();
+
 // Enhanced hero: a true L-shaped matte plate. Low-power/touch devices retain CSS 3D.
 async function initThree() {
- if (reduced || innerWidth < 1000 || (navigator.deviceMemory && navigator.deviceMemory < 4) || navigator.connection?.saveData) return;
+ if ((navigator.deviceMemory && navigator.deviceMemory < 4) || navigator.connection?.saveData) return;
  let renderer;
  try {
  const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/+esm');
@@ -125,11 +159,11 @@ async function initThree() {
  const decal=new THREE.Mesh(new THREE.PlaneGeometry(1.64,2.64),new THREE.MeshBasicMaterial({map:texture,transparent:true,depthWrite:false}));decal.position.z=.034;group.add(decal);
  scene.add(new THREE.AmbientLight(0x8cabbf,2));const key=new THREE.DirectionalLight(0xffffff,3);key.position.set(-3,5,5);scene.add(key);
  const blue=new THREE.PointLight(0x00b3ff,25,12);blue.position.set(2,1,-1);scene.add(blue);
- group.rotation.set(.08,-.35,-.12);
+ group.rotation.set(platePitch,plateYaw,0);
  const resize=()=>{const r=stage.getBoundingClientRect();renderer.setSize(r.width,r.height);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();};resize();new ResizeObserver(resize).observe(stage);
  renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();stage.classList.remove('three-ready');renderer.setAnimationLoop(null);});
  stage.prepend(renderer.domElement);stage.classList.add('three-ready');
- renderer.setAnimationLoop(time=>{if(document.hidden||paused||stage.classList.contains('offscreen'))return;group.position.y=Math.sin(time*.001)*.11;group.rotation.y=-.35+mouseX*.3;group.rotation.x=.08-mouseY*.15;renderer.render(scene,camera);});
+ renderer.setAnimationLoop(time=>{if(document.hidden||stage.classList.contains('offscreen'))return;group.position.y=paused||reduced?0:Math.sin(time*.001)*.08;group.rotation.y=plateYaw;group.rotation.x=platePitch;renderer.render(scene,camera);});
  } catch { renderer?.dispose(); $('.product-stage').classList.remove('three-ready'); }
 }
 initThree();

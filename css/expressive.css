@@ -1,0 +1,193 @@
+﻿/* Camada visual mais expressiva. Pode ser removida sem alterar a estrutura original. */
+:root { --muted: #acb8ca; --line: #29415c; }
+header { border-bottom-color: #235179; background: #060e1aed; }
+header .brand { text-shadow: 0 4px 25px #008ddd38; }
+nav a, .nav-contact { font-size: 14px; }
+.nav-contact { border-color: #2580b4; background: #0c273d; }
+.hero { height: auto; min-height: 770px; padding-top: 65px; padding-bottom: 90px; gap: 25px; }
+.hero-grid { opacity: 1; background: radial-gradient(ellipse at 82% 42%,#0068b550,transparent 58%),linear-gradient(#168bc013 1px,transparent 1px),linear-gradient(90deg,#168bc013 1px,transparent 1px); background-size: auto,60px 60px,60px 60px; }
+h1 { font-size: clamp(48px,5.2vw,78px); font-weight: 700; letter-spacing: -3px; }
+h2 { font-weight: 600; }
+.hero-copy > .eyebrow { padding: 8px 13px; background: #0a2338; border: 1px solid #255a7b; border-radius: 30px; font-size: 11px; }
+.hero-copy > p { font-size: 17px; color: #c4cfde; }
+.hero-notes { flex-wrap: wrap; font-size: 12px; }
+.button { border-radius: 9px; font-size: 13px; background: linear-gradient(120deg,#00c6ef,#2689ff); box-shadow: 0 8px 26px #0073cc30; min-height: 50px; }
+.button.secondary { background: #102339; border-color: #366086; }
+.hero-offers { display: grid; grid-template-columns: 1fr 1fr; max-width: 480px; margin-top: 27px; border: 1px solid #295373; border-radius: 12px; background: #091a2ccc; overflow: hidden; }
+.hero-offers a { padding: 16px 18px; display: flex; flex-direction: column; gap: 3px; }
+.hero-offers a + a { border-left: 1px solid #295373; }
+.hero-offers a:hover { background: #10314d; }
+.hero-offers span { color: #c1d3e4; font-size: 13px; }
+.hero-offers strong { font: 600 22px var(--display); color: #fff; }
+.hero-offers small { font-size: 12px; color: #91c9ec; }
+.product-stage { height: 540px; border: 1px solid #22618b; border-radius: 28px 8px 28px 8px; background: radial-gradient(ellipse at 50% 48%,#006caa65,transparent 68%),linear-gradient(145deg,#0c2237,#030c17); box-shadow: inset 0 0 70px #002e5660,0 25px 70px #0005; }
+.product-stage::before,.product-stage::after { content: ''; position: absolute; width: 48px; height: 48px; border-color: #39c8fa; border-style: solid; pointer-events: none; }
+.product-stage::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; border-radius: 8px 0 0; }
+.product-stage::after { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; border-radius: 0 0 8px; }
+.product-label { top: 28px; left: 15%; font-size: 10px; letter-spacing: 1px; color: #c1e6fc; }
+.plate-wrap { top: 17%; }
+.product-caption { bottom: 25px; left: 22px; font-size: 9px; letter-spacing: 1px; }
+.floating-tag { top: 64%; right: -10px; padding: 17px 22px; background: #0b2d49ed; border-color: #3b99ca; font-size: 14px; }
+.motion-toggle { bottom: 64px; right: 20px; background: #091e30; }
+.orbit { max-width: 90%; }
+.orbit-two { max-width: 95%; }
+.marquee { background: #092540; border-color: #2679aa; }
+.marquee span { font-size: 14px; color: #e1edf7; }
+.section { padding-top: 80px; padding-bottom: 80px; }
+.section-heading { padding-bottom: 26px; border-bottom: 1px solid #204363; }
+.section-heading > p { font-size: 15px; }
+.eyebrow { font-size: 12px; letter-spacing: 1.5px; }
+.tabs { padding: 7px; border: 1px solid #274965; border-radius: 12px; background: #0b1929; gap: 7px; }
+.tabs button { flex: 1; border-radius: 7px; border: 1px solid transparent; font-size: 14px; padding: 14px 18px; }
+.tabs button[aria-selected=true] { color: white; border-color: #168fc8; background: #0a4d78; box-shadow: inset 0 1px 0 #71d9ff38; }
+.panel { gap: 45px; }
+.panel-copy p { font-size: 15px; }
+.panel-copy h3 { font-weight: 600; }
+.demo-scene { border-color: #30608a; background: radial-gradient(ellipse at 40% 60%,#00548370,transparent 70%),linear-gradient(130deg,#102d47,#070e1b); min-height: 430px; }
+.destinations button { font-size: 13px; border-radius: 7px; padding: 10px 13px; }
+.fine { font-size: 12px!important; color: #afc1d2; }
+.text-link { font-size: 14px; }
+.why { background: linear-gradient(135deg,#0b2842,#07121f); border-block-color: #21587e; }
+.benefits { gap: 16px; }
+.benefits article { background: #0d2034; border: 1px solid #285074; padding: 26px 22px; border-radius: 12px; }
+.benefits article > span { display: grid; place-items: center; width: 55px; height: 55px; background: #123b59; border: 1px solid #247cb0; border-radius: 13px; margin-bottom: 25px; }
+.benefits h3 { line-height: 1.35; }
+.benefits p { font-size: 14px; }
+.price-card { border-radius: 16px; padding: 32px 26px; border-color: #31516f; box-shadow: 0 16px 35px #0003; }
+.price-card::before { content: ''; height: 3px; position: absolute; top: 0; left: 28px; right: 28px; background: #298dc6; border-radius: 0 0 6px 6px; }
+.price-card.featured { background: linear-gradient(155deg,#07446a,#0a1a30 65%); border: 2px solid #27bfff; }
+.featured::before { background: #71e6ff; }
+.price-card .eyebrow { font-size: 11px; }
+.price-card p,.price-card .checks { font-size: 14px; }
+.price-card h3 { font-size: 27px; }
+.price-card .button { font-size: 13px; }
+.recommended { font-size: 11px; padding: 6px 15px; top: -17px; }
+.nfc-price-row { padding: 20px 0; }
+.nfc-price-row > span,.nfc-price-row small { font-size: 14px; }
+.nfc-price-row strong { font-size: 33px; }
+.about { background: linear-gradient(110deg,#0a1828,transparent); }
+.about p { font-size: 15px; }
+.founders article { background: #0e243a; border-color: #29587c; padding: 32px 20px; }
+.founders h3 { font-size: 18px; }
+.founders article > span { font-size: 12px; }
+.avatar { background: linear-gradient(145deg,#086ca0,#0c2139); border: 2px solid #39bde9; }
+.faq details { padding: 20px; margin-bottom: 10px; border: 1px solid #254661; border-radius: 9px; background: #0c1a2b; }
+.faq details[open] { border-color: #2689be; background: #10283f; }
+.faq summary { font-size: 15px; }
+.faq details p,.faq > div > p { font-size: 14px; }
+.contact { background: radial-gradient(at 5% 60%,#064b7860,transparent 65%); border-top-color: #2b5b7b; }
+.contact p { font-size: 15px; }
+form { border-color: #315c80; background: #0d2033; border-radius: 15px; }
+label { font-size: 14px; }
+input,select,textarea { font-size: 16px; background: #061320; border-color: #345674; }
+.contact-details { font-size: 14px; }
+footer { background: #081421; }
+footer p,footer > div,footer > small { font-size: 12px; }
+
+/* A composição se simplifica em telas pequenas, mantendo contraste e áreas de toque. */
+@media (max-width: 1050px) {
+  .hero { gap: 20px; }
+  h1 { font-size: 52px; }
+  .product-stage { height: 490px; }
+  .product-label { left: 20%; right: 15%; text-align: center; }
+  .product-caption b { display: none; }
+  .benefits { grid-template-columns: 1fr 1fr; }
+  .price-card { padding: 28px 20px; }
+  .price-card h3 { font-size: 23px; }
+}
+@media (max-width: 760px) {
+  .hero { min-height: 0; padding-top: 35px; padding-bottom: 80px; gap: 0; }
+  h1 { font-size: clamp(42px,10vw,64px); letter-spacing: -2px; }
+  .hero-copy > p { font-size: 16px; }
+  .hero-copy > .eyebrow { font-size: 10px; }
+  .hero-notes { font-size: 12px; gap: 10px 16px; }
+  .hero-offers { width: 100%; margin-top: 24px; }
+  .hero-offers a { padding: 14px; }
+  .hero-offers strong { font-size: 22px; }
+  .product-stage { width: 100%; height: 420px; margin-top: 30px; }
+  .product-label { top: 24px; font-size: 9px; }
+  .plate-wrap { top: 16%; }
+  .floating-tag { right: 8px; padding: 12px; font-size: 12px; }
+  .product-caption { left: 20px; bottom: 23px; font-size: 8px; }
+  .section { padding-top: 55px; padding-bottom: 55px; }
+  .section-heading { margin-bottom: 28px; padding-bottom: 22px; }
+  .tabs { gap: 5px; }
+  .tabs button { flex: 0 0 auto; font-size: 13px; padding: 12px 15px; }
+  .panel { gap: 28px; }
+  .demo-scene { min-height: 350px; }
+  .benefits { gap: 12px; }
+  .benefits article { padding: 20px 16px; }
+  .benefits h3 { font-size: 17px; }
+  .benefits p { font-size: 14px; }
+  .price-card { padding: 30px 24px; }
+  .price-card h3 { font-size: 28px; }
+  .faq details { padding: 17px; }
+  .founders article { padding: 26px 14px; }
+  .founders h3 { font-size: 16px; }
+  .motion-toggle { right: 16px; bottom: 58px; }
+  .actions .button { font-size: 13px; }
+}
+@media (max-width: 420px) {
+  .benefits { grid-template-columns: 1fr; }
+  .benefits article > span { float: left; margin: 0 18px 10px 0; }
+  .benefits article { display: flow-root; }
+  .hero-offers strong { font-size: 20px; }
+  .hero-offers span,.hero-offers small { font-size: 12px; }
+}
+
+/* Identidade: emblema vetorial em três pontos, sem repetir no conteúdo todo. */
+a.brand { display: inline-flex; align-items: center; gap: 10px; }
+a.brand > .brand-wordmark { display: block; color: var(--white); }
+.brand-wordmark > span { color: var(--blue); }
+.brand-emblem { display: block; width: 64px; height: 64px; flex-shrink: 0; }
+footer .brand-emblem { width: 56px; height: 56px; }
+
+/* Inspeção 360 graus: gestos horizontais giram, gestos verticais rolam a página. */
+.product-stage { touch-action: pan-y; cursor: grab; user-select: none; }
+.product-stage.dragging { cursor: grabbing; }
+.product-stage .plate-wrap { animation: none; }
+.plate-face { backface-visibility: hidden; transform: translateZ(3px); }
+.plate-back { position: absolute; inset: 0; border: 1px solid #394652; border-radius: 8px 8px 3px 3px; background: #15191e; transform: rotateY(180deg) translateZ(3px); backface-visibility: hidden; }
+.plate-side { position: absolute; top: 0; bottom: 0; right: 0; width: 6px; background: #343c45; transform: rotateY(90deg); }
+.rotation-controls { position: absolute; left: 12px; right: 12px; bottom: 55px; display: flex; align-items: center; justify-content: center; gap: 8px; z-index: 4; }
+.rotation-controls button { min-width: 40px; height: 40px; border: 1px solid #3b749a; border-radius: 8px; background: #0b2339; color: #d9f3ff; font-size: 19px; }
+.rotation-controls button[data-turn=reset] { padding: 0 10px; font-size: 12px; }
+.rotation-controls span { font-size: 12px; color: #d1e6f6; }
+.rotation-controls button:hover { background: #125077; }
+.product-stage .motion-toggle { bottom: auto; top: 58px; right: 15px; z-index: 5; }
+.product-stage .floating-tag { pointer-events: none; top: 57%; }
+.product-stage .plate-wrap { top: 15%; }
+
+/* Monitor com mini site isolado: barra do navegador e base do computador. */
+.desktop-demo { width: 100%; min-width: 0; align-self: center; }
+.monitor-frame { border: 9px solid #303d4e; border-radius: 17px; background: #101b2a; overflow: hidden; box-shadow: 0 25px 45px #0005; }
+.browser-bar { height: 42px; display: flex; align-items: center; gap: 10px; padding: 0 12px; background: #142235; color: #b6c9db; font-size: 13px; }
+.browser-dots { font-size: 9px; letter-spacing: 3px; color: #6797ba; }
+.browser-address { flex: 1; padding: 3px 10px; background: #071322; border: 1px solid #2e4963; border-radius: 5px; text-align: center; color: #d5e9f6; }
+.desktop-demo iframe { display: block; width: 100%; height: 430px; border: 0; background: #f5f4ec; }
+.monitor-chin { height: 37px; display: grid; place-items: center; border-top: 1px solid #32475d; }
+.monitor-chin img { display: block; }
+.monitor-neck { width: 90px; height: 45px; margin: auto; background: linear-gradient(90deg,#172334,#4a6079,#172334); clip-path: polygon(18% 0,82% 0,100% 100%,0 100%); }
+.monitor-foot { height: 12px; width: 190px; max-width: 65%; margin: auto; background: #4b6179; border-radius: 50% 50% 5px 5px; }
+.demo-instructions { text-align: center; color: #b9cbdc; font-size: 13px; line-height: 1.6; margin: 17px 10px 0; }
+@media(max-width:1050px) { .brand-emblem { width: 52px; height: 52px; } .rotation-controls span { font-size: 11px; } }
+@media(max-width:760px) {
+  .brand-emblem { width: 43px; height: 43px; }
+  a.brand { gap: 7px; }
+  header .brand { font-size: 27px; }
+  header .brand small { font-size: 6px; letter-spacing: 4px; }
+  .rotation-controls { gap: 5px; bottom: 48px; }
+  .rotation-controls span { font-size: 10px; }
+  .rotation-controls button { min-width: 35px; height: 38px; }
+  .rotation-controls button[data-turn=reset] { font-size: 11px; padding: 0 6px; }
+  .product-stage .plate-wrap { top: 12%; }
+  .monitor-frame { border-width: 6px; }
+  .browser-bar { padding: 0 8px; gap: 7px; }
+  .browser-dots { display: none; }
+  .desktop-demo iframe { height: 440px; }
+}
+
+/* Contém os anéis decorativos no quadro sem criar largura extra no celular. */
+@media (max-width: 760px) {
+  .product-stage { overflow: clip; }
+}
